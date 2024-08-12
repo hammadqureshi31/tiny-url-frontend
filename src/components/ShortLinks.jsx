@@ -11,7 +11,7 @@ const ShortLinks = () => {
   const [show, setShow] = useState({});
   const [copied, setCopied] = useState({});
   const user = useSelector((state) => state.user);
-  const backendPortURL = "http://localhost:3000/url/";
+  const backendPortURL = "https://tiny-url-backend-production-0b54.up.railway.app/url/";
 
   useEffect(() => {
     const fetchURLs = async () => {
