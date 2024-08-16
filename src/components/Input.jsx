@@ -15,19 +15,22 @@ const Input = () => {
 
   const handleClick = async () => {
     try {
-      const response = await axios.post(`${backendPortURL}url`, { url: originlURL }, { withCredentials: true });
-      console.log(response.data);
-      setOriginlURL("");
-      console.log("from input ", response);
+      const response = await axios.post(
+        `${backendPortURL}url`,
+        { url: originalURL },
+        { withCredentials: true }
+      );
 
+      console.log("from input", response.data);
+      setOriginalURL("");
       dispatch(setURL(response.data));
     } catch (error) {
       if (error.response && error.response.status === 401) {
         console.error("You must log in first");
-        // alert("Please login first")
-        toast.error('Please login first',{ theme: "dark" });
+        toast.error('Please login first', { theme: "dark" });
       } else {
         console.error(error);
+        toast.error('An error occurred. Please try again.', { theme: "dark" });
       }
     }
   };
