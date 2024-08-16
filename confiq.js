@@ -1,1 +1,1 @@
-export const backendPortURL = "http://localhost:3000/"
+export const backendPortURL = "https://tiny-url-backend.vercel.app/"
