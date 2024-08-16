@@ -47,8 +47,8 @@ const Input = () => {
             <input
               type="text"
               placeholder="Enter the link here"
-              value={originlURL}
-              onChange={(e) => setOriginlURL(e.target.value)}
+              value={originalURL}
+              onChange={(e) => setOriginalURL(e.target.value)}
               className=" bg-transparent text-white md:ml-2 md:w-96 text-ellipsis focus:outline-none"
             />
 
