@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {backendPortURL} from "../../confiq"
 
 const Input = () => {
-  const [originlURL, setOriginlURL] = useState("");
+  const [originalURL, setOriginalURL] = useState("");
   const dispatch = useDispatch();
 
   const handleClick = async () => {
