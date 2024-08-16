@@ -11,24 +11,17 @@ const ShortLinks = () => {
   const [show, setShow] = useState({});
   const [copied, setCopied] = useState({});
   const user = useSelector((state) => state.user);
-  const backendPortURL = "https://tiny-url-backend-production-0b54.up.railway.app/url/";
+  const links = useSelector((state)=> state.url)
+  const backendPortURL = "http://localhost:3000/url";
 
   useEffect(() => {
+
+    console.log("links",links)
     const fetchURLs = async () => {
       try {
         const response = await axios.get(backendPortURL);
-        setAllURLs(response.data);
-
-        let filteredData = [];
-        if (!user) {
-          const userId = parseInt(localStorage.getItem("loggedInUserId"));
-          filteredData = response.data.filter(
-            (url) => parseInt(url.createdBy) === userId
-          );
-        } else {
-          filteredData = response.data.filter((url) => url.createdBy === user._id);
-        }
-
+        console.log(response.data)
+        let filteredData = response.data.filter((url) => url.createdBy === user._id);
         setFilteredURLs(filteredData);
       } catch (error) {
         console.error("Error fetching URLs:", error);
@@ -36,10 +29,10 @@ const ShortLinks = () => {
     };
 
     fetchURLs();
-  }, [user]);
+  }, [user, links]);
 
   const handleCopyURL = (shortId) => {
-    const shortURL = `${backendPortURL}${shortId}`;
+    const shortURL = `${backendPortURL}/${shortId}`;
 
     navigator.clipboard
       .writeText(shortURL)
@@ -98,9 +91,9 @@ const ShortLinks = () => {
             <div key={url._id}>
               <div className="flex justify-between py-3">
                 <div className="flex justify-start text-center gap-1 text-gray-400">
-                  <h3 className="text-md pt-1 max-w-56 overflow-hidden  text-ellipsis sm:w-64 md:w-72">
+                  <h3 className="text-md font-mono pt-1 max-w-56 overflow-hidden  text-ellipsis sm:w-64 md:w-72">
                     {backendPortURL}
-                    {url.shortID}
+                    /{url.shortID}
                   </h3>
                   <div>
                     <div
@@ -124,13 +117,13 @@ const ShortLinks = () => {
                 </div>
 
                 <div className="hidden sm:flex justify-between text-center sm:w-52 md:w-80">
-                  <div className="text-gray-400 text-left text-wrap overflow-hidden text-ellipsis">
+                  <div className="text-gray-400 text-left font-mono text-wrap overflow-hidden text-ellipsis">
                     {url.redirectURL}
                   </div>
                 </div>
 
                 <div className="flex justify-between text-center sm:gap-14 md:gap-36">
-                  <div className="hidden sm:flex sm:justify-between sm:pl-20">
+                  <div className="hidden sm:flex font-mono sm:justify-between sm:pl-20">
                     {url.visitHistory.length}
                   </div>
 
@@ -146,7 +139,7 @@ const ShortLinks = () => {
 
               {show[url._id] && (
                 <div className="flex justify-between text-center gap-1 sm:hidden">
-                  <div className="text-gray-400 w-3/4 overflow-hidden text-ellipsis text-left">
+                  <div className="text-gray-400 font-mono w-3/4 overflow-hidden text-ellipsis text-left">
                     {url.redirectURL}
                   </div>
                   <img

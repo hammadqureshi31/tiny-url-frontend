@@ -3,9 +3,25 @@ import Navbar from '../components/Navbar';
 import MainText from '../components/MainText';
 import Input from '../components/Input';
 import ShortLinks from '../components/ShortLinks';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { backendPortURL } from '../../confiq';
+import { setUser } from '../Redux/slices/UserSlice';
 
 const HomePage = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const checkForLoginUser = async ()=>{
+      axios.defaults.withCredentials = true
+      const loginResponse = await axios.get(`${backendPortURL}user/me`)
+      console.log("loginresponse", loginResponse)
+      dispatch(setUser(loginResponse.data))
+    }
+    checkForLoginUser()
+
+  }, [])
+  
   
   return (
     <div className='text-white'>

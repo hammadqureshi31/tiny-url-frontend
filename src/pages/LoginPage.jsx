@@ -8,16 +8,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../Redux/slices/UserSlice';
 import { backendPortURL } from '../../confiq';
-import { signInWithGoogleDone, signInWithGooglePending } from '../Redux/slices/googleLogin';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [rememberMe, setRememberMe] = useState(false);
-
-  useEffect(() => {
-    localStorage.setItem("googleLogin", false)
-  }, [])
   
 
   const loginValidation = Yup.object().shape({
@@ -31,9 +26,6 @@ const LoginPage = () => {
     try {
       const response = await axios.post(`${backendPortURL}user/login`, { email, password }, { withCredentials: true });
       dispatch(setUser(response.data));
-      localStorage.setItem("loggedInUserId", response.data._id);
-      localStorage.setItem("loggedInUserEmail", response.data.email);
-      localStorage.setItem("loggedInUserName", response.data.username);
 
       if (response.status === 200) {
         toast.success('Login Successful', { theme: "dark" });
