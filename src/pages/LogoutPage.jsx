@@ -10,7 +10,7 @@ const LogoutPage = () => {
     const logoutUser = async () => {
       try {
         axios
-          .get(`${backendPortURL}user/logout`, {
+          .post(`${backendPortURL}user/logout`, {
             withCredentials: true,
           })
           .then((response) => console.log(response.data))
