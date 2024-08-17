@@ -15,7 +15,7 @@ const LogoutPage = () => {
           })
           .then((response) => {
             console.log(response.data)
-            navigate('/')
+            navigate('/login')
           })
           .catch((error) => console.error("Error:", error));
       } catch (error) {
