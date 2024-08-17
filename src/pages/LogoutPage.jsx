@@ -9,10 +9,12 @@ const LogoutPage = () => {
   useEffect(() => {
     const logoutUser = async () => {
       try {
-        await axios.post(`${backendPortURL}user/logout`, {}, {
-          withCredentials: true  // Important to send cookies
-      });
-        navigate("/login"); // Redirect to login page after logout
+        axios
+          .get(`${backendPortURL}user/logout`, {
+            withCredentials: true,
+          })
+          .then((response) => console.log(response.data))
+          .catch((error) => console.error("Error:", error));
       } catch (error) {
         console.error("Error logging out:", error);
         // Optionally, display an error message to the user
@@ -22,9 +24,7 @@ const LogoutPage = () => {
     logoutUser();
   }, [navigate]);
 
-  return (
-    <div>Logging Out...</div>
-  );
+  return <div>Logging Out...</div>;
 };
 
 export default LogoutPage;
