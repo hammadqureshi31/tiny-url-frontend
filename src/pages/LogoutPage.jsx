@@ -13,7 +13,10 @@ const LogoutPage = () => {
           .post(`${backendPortURL}user/logout`, {
             withCredentials: true,
           })
-          .then((response) => console.log(response.data))
+          .then((response) => {
+            console.log(response.data)
+            navigate('/')
+          })
           .catch((error) => console.error("Error:", error));
       } catch (error) {
         console.error("Error logging out:", error);
