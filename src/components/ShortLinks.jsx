@@ -12,7 +12,7 @@ const ShortLinks = () => {
   const [copied, setCopied] = useState({});
   const user = useSelector((state) => state.user);
   const links = useSelector((state)=> state.url)
-  const backendPortURL = "https://tiny-url-backend.vercel.app/url";
+  const backendPortURL = "http://localhost:3000/url";
 
   useEffect(() => {
 
