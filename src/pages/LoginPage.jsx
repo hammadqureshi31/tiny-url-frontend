@@ -40,9 +40,7 @@ const LoginPage = () => {
   };
 
   const handleLoginWithGoogle = () => {
-    // dispatch(signInWithGooglePending()); 
-    localStorage.setItem("googleLogin", true)
-    window.open(`${backendPortURL}auth/google/callback`, "_self");
+    window.open(`${backendPortURL}auth/google`, "_self");
   };
 
   return (
