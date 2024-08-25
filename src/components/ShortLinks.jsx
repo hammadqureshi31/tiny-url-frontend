@@ -88,7 +88,7 @@ const ShortLinks = () => {
       <div>
         {filteredURLs.length > 0 ? (
           filteredURLs.map((url) => (
-            <div key={url._id}>
+            <div key={url?._id}>
               <div className="flex justify-between py-3">
                 <div className="flex justify-start text-center gap-1 text-gray-400">
                   <h3 className="text-md font-mono pt-1 max-w-56 overflow-hidden  text-ellipsis sm:w-64 md:w-72">
