@@ -14,7 +14,8 @@ const Input = () => {
   const dispatch = useDispatch();
 
   const handleClick = async () => {
-    try {
+    if(originalURL?.length < 1){
+      try {
       const response = await axios.post(
         `${backendPortURL}url`,
         { url: originalURL },
@@ -32,6 +33,9 @@ const Input = () => {
         console.error(error);
         toast.error('An error occurred. Please try again.', { theme: "dark" });
       }
+    }
+    }else{
+      toast.error('Link field is required!', { theme: "dark" });
     }
   };
 
