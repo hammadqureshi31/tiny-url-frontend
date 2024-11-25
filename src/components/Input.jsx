@@ -14,7 +14,7 @@ const Input = () => {
   const dispatch = useDispatch();
 
   const handleClick = async () => {
-    if(originalURL?.length < 1){
+    if(originalURL){
       try {
       const response = await axios.post(
         `${backendPortURL}url`,
@@ -25,15 +25,15 @@ const Input = () => {
       console.log("from input", response.data);
       setOriginalURL("");
       dispatch(setURL(response.data));
-    } catch (error) {
+      } catch (error) {
       if (error.response && error.response.status === 401) {
         console.error("You must log in first");
         toast.error('Please login first', { theme: "dark" });
       } else {
         console.error(error);
         toast.error('An error occurred. Please try again.', { theme: "dark" });
+        }
       }
-    }
     }else{
       toast.error('Link field is required!', { theme: "dark" });
     }
